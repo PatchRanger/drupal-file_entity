@@ -16,8 +16,9 @@ env:
 
 before_script:
  - mysql -e 'create database drupal;'
- - pyrus channel-discover pear.drush.org
- - pyrus install drush/drush-devel
+ #- pyrus channel-discover pear.drush.org
+ #- pyrus install drush/drush-devel
+ - composer global require drush/drush:dev-master
  - phpenv rehash
  - cd ..
  # Prepare Drupal.
