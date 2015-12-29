@@ -14,12 +14,26 @@ env:
   # 7.x-2.x
   - GITHUB_REPOSITORY=drupal-file_entity DRUPAL_VERSION=7.x PROFILE=standard DRUPAL_MODULE=file_entity BRANCH=2.x
 
+before_install:
+  - sudo apt-get update > /dev/null
+
+install:
+  # install php packages required for running a web server from drush on php 5.3
+  - sudo apt-get install -y --force-yes php5-cgi php5-mysql
+
+  # add composer's global bin directory to the path
+  # see: https://github.com/drush-ops/drush#install---composer
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+
+  # install drush globally
+  - composer global require drush/drush:dev-master
+
 before_script:
  - mysql -e 'create database drupal;'
+ # @todo Remove.
  #- pyrus channel-discover pear.drush.org
  #- pyrus install drush/drush-devel
- - composer global require drush/drush:dev-master
- - phpenv rehash
+ #- phpenv rehash
  - cd ..
  # Prepare Drupal.
  - mkdir drupal
