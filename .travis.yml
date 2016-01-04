@@ -60,7 +60,7 @@ before_script:
  - drush en $DRUPAL_MODULE --yes
  - drush cc all
  # start a web server on port 8080, run in the background; wait for initialization
- - drush runserver 127.0.0.1:8080 --server=builtin &
+ - drush runserver 127.0.0.1:8080 &
  - until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do true; done
  - cp ../$GITHUB_REPOSITORY/$DRUPAL_VERSION/$BRANCH/$DRUPAL_MODULE.test sites/all/modules/$DRUPAL_MODULE/$DRUPAL_MODULE.test
  #- drush vset simpletest_verbose FALSE --yes
